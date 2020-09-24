@@ -15,5 +15,7 @@ namespace Cs6065_Homework1.Data
             : base(options)
         {
         }
+
+        public DbSet<UserInfoEntity> UserInfoEntitys { get; set; }
     }
 }

@@ -14,7 +14,9 @@
     @if(SignInManager.IsSignedIn(User))
     {
         <h3> you are signed in.</h3>
-        <p>@User.ToString()</p>
+        <p>
+            go check out your <a asp-controller="UserInfo" asp-action="Index">user info</a>!
+        </p>
     }
     else
     {

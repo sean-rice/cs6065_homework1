@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Cs6065_Homework1.Models;
+using Cs6065_Homework1.Services;
 
 namespace Cs6065_Homework1
 {
@@ -54,6 +55,8 @@ namespace Cs6065_Homework1
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<UserInfoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
