@@ -13,6 +13,13 @@
 @if(SignInManager.IsSignedIn(User))
 {
     <div class="text-left">
+        <p>you're logged in!</p>
+        <p>@User.ToString()</p>
+    </div>
+}
+else
+{
+    <div class="text-left">
         <p>
             If you don't have an account:
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">register an account</a>
@@ -21,12 +28,5 @@
             If you have previously registered an account:
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">log in</a>
         </p>
-    </div>
-}
-else
-{
-    <div class="text-left">
-        <p>you're logged in!</p>
-        <p>@User.ToString()</p>
     </div>
 }
