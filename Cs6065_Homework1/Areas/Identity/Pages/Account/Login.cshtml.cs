@@ -33,8 +33,6 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
         public string ReturnUrl { get; set; }
 
         [TempData]
@@ -43,15 +41,13 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Display(Name = "username")]
+            public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "password")]
             public string Password { get; set; }
-
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -66,8 +62,6 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             ReturnUrl = returnUrl;
         }
 
@@ -79,7 +73,7 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -87,7 +81,7 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = false});
                 }
                 if (result.IsLockedOut)
                 {
