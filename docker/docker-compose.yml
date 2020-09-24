@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  reverseproxy:
+    build:
+      context: ./nginx
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+
+  webapp:
+    depends_on:
+      - reverseproxy
+    build:
+      context: ..
+      dockerfile: ./docker/webapp/webapp.Dockerfile
+    expose:
+      - "5000"
+    restart: always
