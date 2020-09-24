@@ -45,6 +45,8 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        private readonly string VerificationAnswer = "rashmi";
+
         public class InputModel
         {
             //[Required]
@@ -67,6 +69,10 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
             [Display(Name = "confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [StringLength(16, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "anti-bot check", Prompt = "first name of our cs6065 instructor?")]
+            public string VerificationInput { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -81,6 +87,12 @@ namespace Cs6065_Homework1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if (!Input.VerificationInput.Equals(VerificationAnswer, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    ModelState.AddModelError(string.Empty, "failed anti-bot check.");
+                    return Page();
+                }
+
                 var user = new ApplicationUser { UserName = Input.Username };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
