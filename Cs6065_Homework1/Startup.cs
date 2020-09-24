@@ -30,8 +30,24 @@ namespace Cs6065_Homework1
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn = new SignInOptions
+                {
+                    RequireConfirmedAccount = false,
+                    RequireConfirmedEmail = false,
+                    RequireConfirmedPhoneNumber = false
+                };
+                options.Password = new PasswordOptions
+                {
+                    RequireDigit = false,
+                    RequiredLength = 2,
+                    RequiredUniqueChars = 1,
+                    RequireLowercase = false,
+                    RequireNonAlphanumeric = false,
+                    RequireUppercase = false
+                };
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllersWithViews();
