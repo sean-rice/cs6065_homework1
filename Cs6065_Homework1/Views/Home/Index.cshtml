@@ -7,26 +7,25 @@
 }
 
 <div class="text-center">
-    <h2 class="display-5">cs6065: cloud computing, assignment #1</h1>
+    <h2 class="display-5">cs6065: cloud computing<br> assignment #1</h1>
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 </div>
-@if(SignInManager.IsSignedIn(User))
-{
-    <div class="text-left">
-        <p>you're logged in!</p>
+<div class="text-left">
+    @if(SignInManager.IsSignedIn(User))
+    {
+        <h3> you are signed in.</h3>
         <p>@User.ToString()</p>
-    </div>
-}
-else
-{
-    <div class="text-left">
+    }
+    else
+    {
+        <h3> you are not signed in.</h3>
         <p>
-            If you don't have an account:
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">register an account</a>
+            if you don't have an account:
+            <a asp-area="Identity" asp-page="/Account/Register">register an account</a>
         </p>
         <p>
-            If you have previously registered an account:
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">log in</a>
+            if you have previously registered an account:
+            <a asp-area="Identity" asp-page="/Account/Login">log in</a>
         </p>
-    </div>
-}
+    }
+</div>
