@@ -1,4 +1,5 @@
-@inject SignInManager<IdentityUser> SignInManager
+@using Cs6065_Homework1.Models
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
