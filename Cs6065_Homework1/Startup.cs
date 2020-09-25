@@ -80,7 +80,7 @@ namespace Cs6065_Homework1
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            app.UseStaticFiles();
+            app.UseFileServer();
 
             app.UseRouting();
 
