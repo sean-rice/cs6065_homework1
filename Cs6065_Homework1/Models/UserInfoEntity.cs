@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Cs6065_Homework1.Models
@@ -7,7 +8,7 @@ namespace Cs6065_Homework1.Models
     public class UserInfoEntity
     {
         [Required]
-        [Key]
+        [Key, ForeignKey("ApplicationUser")]
         public Guid UserId { get; set; }
 
         [Required]
@@ -15,5 +16,9 @@ namespace Cs6065_Homework1.Models
 
         [Required]
         public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }
