@@ -11,5 +11,9 @@ namespace Cs6065_Homework1.Models
 
         [Required]
         public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }
