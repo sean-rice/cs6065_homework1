@@ -797,3 +797,5 @@ $RECYCLE.BIN/
 cs6065_homework1.code-workspace
 app.db
 Cs6065_Homework1/ScaffoldingReadMe.txt
+
+!Cs6065_Homework1/wwwroot/**
