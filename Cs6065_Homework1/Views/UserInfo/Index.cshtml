@@ -16,6 +16,7 @@
             {
                 <p>first name: @Model.FirstName</p>
                 <p>last name: @Model.LastName</p>
+                <p>email: @Model.Email</p>
             }
         </section>
     </div>
@@ -31,6 +32,10 @@
                 <div class="form-group">
                     <label>last name</label>
                     <input asp-for="LastName" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                    <label>email</label>
+                    <input asp-for="Email" class="form-control" value="" />
                 </div>
                 <button type="submit" class="btn btn-primary">submit</button>
             </form>
